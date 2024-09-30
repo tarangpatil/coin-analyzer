@@ -1,17 +1,20 @@
-import { CandleData } from "./types";
-
 export const coinOptions = ["btcusdt", "bnbusdt", "dotusdt"];
 export const intervalOptions = [1, 3, 5];
 
 export function startSocket() {
+  if (!process.env.NEXT_PUBLIC_SOCKET_HOST) {
+    throw new Error("SOCKET_HOST not defined");
+  }
   coinOptions.forEach((coin) => {
     intervalOptions.forEach((m) => {
       const socket = new WebSocket(
-        `${process.env.SOCKET_HOST}/ws/${coin}@kline_${m}m`
+        `${process.env.NEXT_PUBLIC_SOCKET_HOST}/ws/${coin}@kline_${m}m`
       );
       socket.onerror = (err) => console.log(`${coin}${m}`, err);
       socket.onmessage = ({ data }) => {
         data = JSON.parse(data);
+        console.log("DATA", data);
+
         const prevData = JSON.parse(
           localStorage.getItem(`${coin}${m}`) || "[]"
         );

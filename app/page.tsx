@@ -10,8 +10,7 @@ export default function Home() {
   const [candleInterval, setCandleInterval] = useState<number>(
     intervalOptions[0]
   );
-  console.clear();
-  console.log("DATTA", JSON.parse(localStorage.getItem(`btcusdt1`) || "[]"));
+  // console.log("DATTA", data);
 
   useEffect(() => {
     startSocket();
@@ -19,7 +18,7 @@ export default function Home() {
 
   useEffect(() => {
     if (coin) {
-      let intervalId = setInterval(() => {
+      const intervalId = setInterval(() => {
         console.log(localStorage.getItem(`${coin}${candleInterval}`));
         setData(
           JSON.parse(localStorage.getItem(`${coin}${candleInterval}`) || "[]")
@@ -30,7 +29,7 @@ export default function Home() {
         clearInterval(intervalId);
       };
     }
-  }, [coin]);
+  }, [coin, candleInterval]);
   return (
     <main className="flex h-[80vh]">
       <section className="h-full w-1/5 flex-col flex items-center py-20">
@@ -56,13 +55,13 @@ export default function Home() {
         <p className="block mt-20 w-1/2">Select interval:</p>
         <div className="flex flex-col items-start justify-start w-1/2">
           {intervalOptions.map((int) => (
-            <label>
+            <label key={int}>
               <input
                 type="radio"
                 value={int}
                 name="interval"
                 defaultChecked={candleInterval === int}
-                onChange={(e) => setCandleInterval(int)}
+                onChange={() => setCandleInterval(int)}
               />{" "}
               {int} minute
             </label>
