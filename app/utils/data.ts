@@ -10,10 +10,9 @@ export function startSocket() {
       const socket = new WebSocket(
         `${process.env.NEXT_PUBLIC_SOCKET_HOST}/ws/${coin}@kline_${m}m`
       );
-      socket.onerror = (err) => console.log(`${coin}${m}`, err);
+      socket.onerror = (err) => console.error(`${coin}${m}`, err);
       socket.onmessage = ({ data }) => {
         data = JSON.parse(data);
-        console.log("DATA", data);
 
         const prevData = JSON.parse(
           localStorage.getItem(`${coin}${m}`) || "[]"

@@ -10,8 +10,6 @@ export default function Home() {
   const [candleInterval, setCandleInterval] = useState<number>(
     intervalOptions[0]
   );
-  // console.log("DATTA", data);
-
   useEffect(() => {
     startSocket();
   });
@@ -19,7 +17,6 @@ export default function Home() {
   useEffect(() => {
     if (coin) {
       const intervalId = setInterval(() => {
-        console.log(localStorage.getItem(`${coin}${candleInterval}`));
         setData(
           JSON.parse(localStorage.getItem(`${coin}${candleInterval}`) || "[]")
         );
