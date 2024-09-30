@@ -31,6 +31,7 @@ const CandlestickChart: React.FC<Props> = ({ data }) => {
       wickDownColor: "#f44336",
     });
 
+    /* eslint-disable  @typescript-eslint/no-explicit-any */
     const chartData: any = data.map((item) => ({
       time: Math.floor(new Date(item.x).getTime() / 1000),
       open: item.o,

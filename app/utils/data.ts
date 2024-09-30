@@ -3,7 +3,7 @@ export const intervalOptions = [1, 3, 5];
 
 export function startSocket() {
   if (!process.env.NEXT_PUBLIC_SOCKET_HOST) {
-    throw new Error("SOCKET_HOST not defined");
+    throw new Error("NEXT_PUBLIC_SOCKET_HOST not defined");
   }
   coinOptions.forEach((coin) => {
     intervalOptions.forEach((m) => {
