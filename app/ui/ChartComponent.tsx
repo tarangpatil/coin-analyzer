@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
-import { createChart, CandlestickData as ChartData } from "lightweight-charts";
-import { CandleData } from "@/app/utils/types"; // Adjust the import based on your structure
+import { createChart } from "lightweight-charts";
+import { CandleData } from "@/app/utils/types";
 
 interface Props {
   coin: string;
@@ -31,9 +31,8 @@ const CandlestickChart: React.FC<Props> = ({ data }) => {
       wickDownColor: "#f44336",
     });
 
-    // Convert data to the format expected by lightweight-charts
-    const chartData: ChartData[] = data.map((item) => ({
-      time: new Date(item.x).toUTCString(),
+    const chartData: any = data.map((item) => ({
+      time: Math.floor(new Date(item.x).getTime() / 1000),
       open: item.o,
       high: item.h,
       low: item.l,

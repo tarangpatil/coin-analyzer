@@ -5,7 +5,7 @@ import { coinOptions, intervalOptions, startSocket } from "./utils/data";
 import { CandleData } from "./utils/types";
 
 export default function Home() {
-  const [coin, setCoin] = useState<string | null>("btcusdt");
+  const [coin, setCoin] = useState<string | null>(null);
   const [data, setData] = useState<CandleData[]>([]);
   const [candleInterval, setCandleInterval] = useState<number>(
     intervalOptions[0]
