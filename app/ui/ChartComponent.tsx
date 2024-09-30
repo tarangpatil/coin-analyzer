@@ -33,7 +33,7 @@ const CandlestickChart: React.FC<Props> = ({ data }) => {
 
     // Convert data to the format expected by lightweight-charts
     const chartData: ChartData[] = data.map((item) => ({
-      time: item.x,
+      time: new Date(item.x).toUTCString(),
       open: item.o,
       high: item.h,
       low: item.l,
